@@ -8,3 +8,6 @@ Trije znani slovenski matematiki:
 
 Še več:
 - Josip Plemelj
+
+Definitivno niso matematiki:
+-Drek od Janše
