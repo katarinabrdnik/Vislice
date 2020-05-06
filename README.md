@@ -4,7 +4,7 @@ Vaja pri predmetu Uvod v programiranje
 Trije znani slovenski matematiki:
 - Jurij Vega
 - Ivan Vidav
-- Andrej P. škraba
+- Andrej P. Škraba
 
 Še več:
 - Josip Plemelj
