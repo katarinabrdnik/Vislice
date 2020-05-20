@@ -39,7 +39,7 @@
  %else:
 
  <form action="/igra/{{id_igre}}/" method="post">
-    Črka: <input type="text" name="crka" maxlength="1">
+    Črka: <input type="text" name="crka" maxlength="1" autocomplete="off">
     <button type="submit">Ugibaj</button>
  </form>
 
