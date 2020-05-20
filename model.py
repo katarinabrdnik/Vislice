@@ -9,6 +9,8 @@ NAPACNA_CRKA = '-'
 ZMAGA = 'W'
 PORAZ = 'X'
 
+ZACETEK = 'S'
+
 class Igra:
     def __init__(self, geslo, crke=None):
         self.geslo = geslo.upper()
@@ -37,7 +39,7 @@ class Igra:
     def pravilni_del_gesla(self):
         s = ''
         for crka in self.geslo:
-            s += crka if crka in self.crke else '_'
+            s += crka + ' ' if crka in self.crke else '_ '
         return s
 
     def nepravilni_ugibi(self):
@@ -67,3 +69,25 @@ for beseda in open('besede.txt', encoding='utf-8'):
 def nova_igra():
     beseda = random.choice(bazen_besed)
     return Igra(beseda)
+
+class Vislice:
+    def __init__(self):
+        self.igre = {}
+
+    def prost_id_igre(self):
+        if len(self.igre) == 0:
+            return 0  #nekje pač mora začet, vseeno kaj bi dali
+        else:
+            return max(self.igre.keys()) + 1  #število večje od vseh prejšnjih se še zagotovo ni pojavilo
+
+    def nova_igra(self):
+        id_igre = self.prost_id_igre()
+    #če bi tukaj klicali self.nova_igra, bi klicali metodo v tem razredu
+        igra = nova_igra()  #kličemo torej funkcijo
+        self.igre[id_igre] = (igra, ZACETEK)  #nova igra v začetnem stanju
+        return id_igre
+
+    def ugibaj(self, id_igre, crka):
+        igra, _ = self.igre[id_igre]    # s podčrtajem ponavadi označujemo spremenljivke, ki jih ne potrebujemo
+        stanje = igra.ugibaj(crka)
+        self.igre[id_igre] = (igra, stanje)
