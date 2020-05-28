@@ -12,18 +12,22 @@ def index():
 @bottle.post('/igra/')
 def nova_igra():
     id_igre = vislice.nova_igra()
-    bottle.redirect('/igra/{}/'.format(id_igre))
+    bottle.response.set_cookie('idigre', str(id_igre), path='/') #dodamo id_igre v piškotke, ne url (drugi ne morejo vdirat v obstoječo igro)
+    #                                                s path='/' obdržimo piškotke v vseh mapah          
+    bottle.redirect('/igra/')
 
 @bottle.get('/igra/<id_igre:int>/')
 def pokazi_igro(id_igre):
+    id_igre = int(bottle.request.get_cookie('idigre'))
     igra, stanje = vislice.igre[id_igre]
-    return bottle.template('views/igra.tpl', id_igre=id_igre, igra=igra, stanje=stanje)
+    return bottle.template('views/igra.tpl', igra=igra, stanje=stanje)
 
 @bottle.post('/igra/<id_igre:int>/')
-def ugibaj(id_igre):
+def ugibaj():
+    id_igre = int(bottle.request.get_cookie('idigre'))
     crka = bottle.request.forms.getunicode('crka')
     vislice.ugibaj(id_igre, crka)
-    bottle.redirect('/igra/{}/'.format(id_igre))
+    bottle.redirect('/igra/')
 
 @bottle.get('/img/<slika>')
 def pokazi_sliko(slika): 
