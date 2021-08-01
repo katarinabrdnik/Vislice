@@ -15,3 +15,4 @@ Trije znani slovenski matematiki:
 
 Definitivno niso matematiki:
 - Borut Pahor
+- Franc
